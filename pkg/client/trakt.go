@@ -53,7 +53,7 @@ const (
 	traktPathWatchlist           = "/sync/watchlist"
 	traktPathWatchlistRemove     = "/sync/watchlist/remove"
 
-	traktStatusCodeEnhanceYourCalm = 420 // https://github.com/trakt/api-help/discussions/350
+	traktStatusCodeEnhanceYourCalm = 420 // https://forums.trakt.tv/t/freemium-experience-more-features-for-all-with-usage-limits/41641
 )
 
 type TraktClient struct {
@@ -294,7 +294,7 @@ func (tc *TraktClient) doRequest(requestFields requestFields) (*http.Response, e
 				httpMethod: response.Request.Method,
 				url:        response.Request.URL.String(),
 				StatusCode: response.StatusCode,
-				details:    fmt.Sprintf("trakt account limit exceeded, more info here: %s", "https://github.com/trakt/api-help/discussions/350"),
+				details:    fmt.Sprintf("trakt account limit exceeded, more info here: %s", "https://forums.trakt.tv/t/freemium-experience-more-features-for-all-with-usage-limits/41641"),
 			}
 		case http.StatusTooManyRequests:
 			response.Body.Close()
@@ -531,7 +531,7 @@ func (tc *TraktClient) ListsGet(idsMeta entities.TraktIDMetas) ([]entities.Trakt
 func (tc *TraktClient) ListAdd(listID, listName string) error {
 	body, err := json.Marshal(entities.TraktListAddBody{
 		Name:           listName,
-		Description:    fmt.Sprintf("list auto imported from imdb by https://github.com/cecobask/imdb-trakt-sync on %v", time.Now().Format(time.RFC1123)),
+		Description:    fmt.Sprintf("List imported from IMDb using https://github.com/cecobask/imdb-trakt-sync on %v", time.Now().Format(time.RFC1123)),
 		Privacy:        "public",
 		DisplayNumbers: false,
 		AllowComments:  true,
